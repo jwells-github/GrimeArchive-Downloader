@@ -1,6 +1,6 @@
 # Project specific
-downloadedMixes.txt 
-GrimeArchiveDownloads/
+OUTPUT-downloadedMixes.txt 
+OUTPUT-GrimeArchiveDownloads/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
