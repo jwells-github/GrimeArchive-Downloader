@@ -8,7 +8,7 @@ from config import Config
 
 downloadedMixes = {}
 
-def get_mcs(mixMcs, mixId):
+def get_mcs(mixMcs:list[str], mixId:str):
   mcs = ""
   # There are no listed MCs
   if len(mixMcs) == 0:
@@ -45,7 +45,7 @@ def parse_page(page):
     pageMixes.append(Mix(mixId, title, djs, mcs, date, downloadResult = "", downloadSuccessful= False))
   return pageMixes  
 
-def get_mixes_from_page(pageNumber):
+def get_mixes_from_page(pageNumber: int):
   print('Fetching data from page ' + str(pageNumber) + ' of mixes')
   page = BeautifulSoup(requests.get(Config().MIX_TABLE_URL + str(pageNumber)).content, 'html.parser')
   return parse_page(page)

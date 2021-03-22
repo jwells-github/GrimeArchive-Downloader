@@ -34,7 +34,7 @@ class Mix:
     return filename
 
 # Remove characters that cannot be used in a filename
-def removeIllegalCharacters(givenString):
+def removeIllegalCharacters(givenString:str):
   returnString = givenString.replace("\\","_")
   returnString = returnString.replace("/","_")
   returnString = returnString.replace(":","_")
