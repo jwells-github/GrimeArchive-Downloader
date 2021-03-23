@@ -1,7 +1,7 @@
 import requests
 import os
 import concurrent.futures
-from config import Config
+from .config import Config
 
 def check_duplicate_path_name(filePath: str):
   if not os.path.exists(filePath + '.mp3'):
@@ -32,7 +32,7 @@ def create_downloaded_mixes_folder():
   if not os.path.exists(Config().OUTPUT_FOLDER_NAME):
     os.mkdir(Config().OUTPUT_FOLDER_NAME)
 
-def download_mixes(siteMixes:list):
+def download_mixes(siteMixes):
   create_downloaded_mixes_folder()
   with concurrent.futures.ThreadPoolExecutor(max_workers=Config().MAX_DOWNLOAD_THREADS) as executor:
     future_to_download = {executor.submit(download_mix , mix): mix for mix in siteMixes}
