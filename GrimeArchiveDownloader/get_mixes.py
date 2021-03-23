@@ -2,13 +2,13 @@ import requests
 import os
 import concurrent.futures
 from bs4 import BeautifulSoup
-from columns import Columns
-from mix import Mix
-from config import Config
+from .columns import Columns
+from .mix import Mix
+from .config import Config
 
 downloadedMixes = {}
 
-def get_mcs(mixMcs:list[str], mixId:str):
+def get_mcs(mixMcs, mixId:str):
   mcs = ""
   # There are no listed MCs
   if len(mixMcs) == 0:
