@@ -15,10 +15,10 @@ class Mix:
     if len(date) > 0:
       date += " - "
     title = removeIllegalCharacters(self.title)
-    filename = date + title + " - "
+    filename = date + title + " "
     djs = removeIllegalCharacters(self.djs)
     if djs != "Unknown DJ":
-      filename += djs + " " 
+      filename += "- " +  djs + " " 
     mcs = removeIllegalCharacters(self.mcs)
     if len(mcs) > 0:
       filename += "ft. "
