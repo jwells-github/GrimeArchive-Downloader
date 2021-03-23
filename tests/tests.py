@@ -5,17 +5,26 @@ from GrimeArchiveDownloader.mix import Mix
 from GrimeArchiveDownloader.mix import removeIllegalCharacters
 
 class tests(unittest.TestCase):
-  def test_get_mcs_with_zero_length_returns_empty_string(self):
+  def test_get_mcs_with_length_zero_returns_empty_string(self):
     data = []
     result = get_mcs(data, "testId")
     self.assertEqual(result, "")
 
-  def test_get_mcs_with_three_length_returns_comma_seperated_string(self):
+  def test_get_mcs_with_length_three_returns_comma_seperated_string(self):
     data = [BeautifulSoup("<a>Skepta</a>", "html.parser"),
             BeautifulSoup("<a>Big H</a>", "html.parser"),
             BeautifulSoup("<a>Demon</a>", "html.parser")]
     result = get_mcs(data, "testId")
     self.assertEqual(result, "Skepta,Big H,Demon")
+
+  def test_get_mcs_with_length_greather_than_three(self):
+    # Mix URL: https://grimearchive.org/mix/4357405
+    data = [BeautifulSoup("<a>Meridian dan</a>", "html.parser"),
+            BeautifulSoup("<a>Big H</a>", "html.parser"),
+            BeautifulSoup("<a>JME</a>", "html.parser"),
+            BeautifulSoup("<a>more</a>", "html.parser")]
+    result = get_mcs(data,"4357405")
+    self.assertEqual(result, "Meridian Dan,Big H,JME,President T,Meridian")
 
   def test_mix_filename(self):
     data = Mix("1", "MixTitle", "DJ Spooky", "Skepta,Big H,Demon", "2012", downloadResult = "", downloadSuccessful= False)
