@@ -10,16 +10,16 @@ class Mix:
     self.downloadResult = downloadResult
     self.downloadSuccessful = downloadSuccessful
     
-  def fileName(self):
+  def file_name(self):
     date = self.date.replace(" ","").replace("??/","").replace("/",".").replace("?","")
     if len(date) > 0:
       date += " - "
-    title = removeIllegalCharacters(self.title)
+    title = remove_illegal_characters(self.title)
     filename = date + title + " "
-    djs = removeIllegalCharacters(self.djs)
+    djs = remove_illegal_characters(self.djs)
     if djs != "Unknown DJ":
       filename += "- " +  djs + " " 
-    mcs = removeIllegalCharacters(self.mcs)
+    mcs = remove_illegal_characters(self.mcs)
     if len(mcs) > 0:
       filename += "ft. "
     mcList = mcs.split(",")
@@ -34,7 +34,7 @@ class Mix:
     return filename
 
 # Remove characters that cannot be used in a filename
-def removeIllegalCharacters(givenString:str):
+def remove_illegal_characters(givenString:str):
   returnString = givenString.replace("\\","_")
   returnString = returnString.replace("/","_")
   returnString = returnString.replace(":","_")
