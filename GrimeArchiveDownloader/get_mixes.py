@@ -70,9 +70,10 @@ def get_mixes(downloadFilter: DownloadFilter):
   get_already_downloaded_mixes()
   pageCount = get_number_of_pages()
   with concurrent.futures.ThreadPoolExecutor(max_workers=Config().MAX_CRAWLER_THREADS) as executor:
-    future_to_crawl = {executor.submit(get_mixes_from_page, downloadFilter, pageNumber): pageNumber for pageNumber in range(35,pageCount+1)}
+    future_to_crawl = {executor.submit(get_mixes_from_page, pageNumber): pageNumber for pageNumber in range(35,pageCount+1)}
     for future in concurrent.futures.as_completed(future_to_crawl):
       pageMixes = future.result()
       pageMixes[:] = [mix for mix in pageMixes if downloadFilter.compare_year_filter(mix.date)]
+      pageMixes[:] = [mix for mix in pageMixes if downloadFilter.compare_artist_filter(mix.mcs) or downloadFilter.compare_artist_filter(mix.djs)]
       siteMixes.extend(pageMixes)
   return siteMixes
