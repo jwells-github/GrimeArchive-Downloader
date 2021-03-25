@@ -11,22 +11,18 @@ downloadedMixes = {}
 
 def get_mcs(mixMcs, mixId:str):
   mcs = ""
-  # There are no listed MCs
-  if len(mixMcs) == 0:
-    return mcs
-  # There are MCs, but all can be retrieved from the mix table
-  elif len(mixMcs) < 4:
+  if len(mixMcs) > 0 and len(mixMcs) < 4:
     for mc in mixMcs:
       mcs += mc.string + ","
-    return mcs[0:(len(mcs)-1)]
-  # There are too many MCs to be listed in the table and Mix detail page must be fetched
+    mcs = mcs[0:(len(mcs)-1)]
   else:
     mixPage = BeautifulSoup(requests.get(Config().MIX_DETAIL_URL + mixId).content, 'html.parser')
     mixItems = mixPage.find_all('div', class_='mix-item')
     for item in mixItems:
       if item.a != None:
         mcs += item.a.string + ","
-    return mcs[0:(len(mcs)-1)]
+    mcs = mcs[0:(len(mcs)-1)]
+  return mcs
 
 def parse_page(page):
   mixRows = page.find_all('tr', class_='mix-row')
