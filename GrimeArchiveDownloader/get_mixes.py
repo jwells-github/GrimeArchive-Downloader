@@ -3,6 +3,7 @@ import os
 import concurrent.futures
 from bs4 import BeautifulSoup
 from .columns import Columns
+from .download_filter import DownloadFilter
 from .mix import Mix
 from .config import Config
 
@@ -48,7 +49,8 @@ def parse_page(page):
 def get_mixes_from_page(pageNumber: int):
   print('Fetching data from page ' + str(pageNumber) + ' of mixes')
   page = BeautifulSoup(requests.get(Config().MIX_TABLE_URL + str(pageNumber)).content, 'html.parser')
-  return parse_page(page)
+  pageMixes = parse_page(page)
+  return pageMixes
 
 def get_number_of_pages():
   homePage = BeautifulSoup(requests.get(Config().HOME_PAGE_URL).content, 'html.parser')
@@ -66,13 +68,15 @@ def get_already_downloaded_mixes():
   downloadedMixesFile = open(Config().DOWNLOADED_MIXES_FILE_NAME, 'r')
   downloadedMixes = set(downloadedMixesFile.read().split(','))
 
-def get_mixes():
+def get_mixes(downloadFilter: DownloadFilter):
   siteMixes = []
   create_downloaded_mixes_file()
   get_already_downloaded_mixes()
   pageCount = get_number_of_pages()
   with concurrent.futures.ThreadPoolExecutor(max_workers=Config().MAX_CRAWLER_THREADS) as executor:
-    future_to_crawl = {executor.submit(get_mixes_from_page, pageNumber): pageNumber for pageNumber in range(1,pageCount+1)}
+    future_to_crawl = {executor.submit(get_mixes_from_page, downloadFilter, pageNumber): pageNumber for pageNumber in range(35,pageCount+1)}
     for future in concurrent.futures.as_completed(future_to_crawl):
-      siteMixes.extend(future.result())
+      pageMixes = future.result()
+      pageMixes[:] = [mix for mix in pageMixes if downloadFilter.compare_year_filter(mix.date)]
+      siteMixes.extend(pageMixes)
   return siteMixes
