@@ -15,12 +15,12 @@ def check_duplicate_path_name(filePath: str):
       counter += 1
 
 def download_mix(mix):
-    print('Downloading ' + mix.fileName())
+    print('Downloading ' + mix.file_name())
     request = requests.get(Config().DOWNLOAD_URL + mix.id)
     if request.status_code == 404:
       mix.downloadResult = "Broken Link"
       return mix
-    outputPath = check_duplicate_path_name(Config().OUTPUT_FOLDER_NAME +"/"+mix.fileName())
+    outputPath = check_duplicate_path_name(Config().OUTPUT_FOLDER_NAME +"/"+mix.file_name())
     outputPath +='.mp3'  
     with open(outputPath, 'wb') as f:
       f.write(request.content)
