@@ -1,7 +1,9 @@
 # GrimeArchive-Downloader
 
 A Python program to download all of the grime mixes hosted on https://grimearchive.org/
+
 An artist filter may be entered in order to restrict downloads to mixes that contain specific artists.
+
 A year filter may also be given to restrict downloads to mixes from a given year.
 
 Created with Python Version 3.9.2
@@ -23,10 +25,13 @@ In order to redownload mixes OUTPUT-downloadedMixes.txt must be deleted, or the 
 ## Configuration
 
 Downloaded mixes are saved in a folder named OUTPUT-GrimeArchiveDownloads/ which is created inside the program's directory when main.py is ran.
+
 The name of this output folder can be altered by changing the OUTPUT_FOLDER_NAME variable in GrimeArchiveDownloader/config.py
 
 The ID number of all downloaded mixes are written to a .txt file named OUTPUT-downloadedMixes.txt which is created inside the program's directory when main.py is ran.
+
 The name of this file can be altered by changing the DOWNLOADED_MIXES_FILE_NAME variable in GrimeArchiveDownloader/config.py
 
 By default a maximum of 15 threads are used to scrape mix information from the website and a maximum 3 threads are used to download mixes.
+
 The maximum number of threads used can be changed by altering MAX_CRAWLER_THREADS and MAX_DOWNLOAD_THREADS respectivly in GrimeArchiveDownloader/config.py
