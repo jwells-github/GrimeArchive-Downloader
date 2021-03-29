@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from GrimeArchiveDownloader.get_mixes import get_mcs
 from GrimeArchiveDownloader.mix import Mix
 from GrimeArchiveDownloader.mix import remove_illegal_characters
+from GrimeArchiveDownloader.download_filter import DownloadFilter
 
 class tests(unittest.TestCase):
   def test_get_mcs_with_length_zero_returns_empty_string(self):
@@ -50,5 +51,37 @@ class tests(unittest.TestCase):
     data = "a\\b/c:d\"e*f?g|h<i>j"
     result = remove_illegal_characters(data)
     self.assertEqual(result,"a_b_c_d_e_f_g_h_i_j")
+
+  def test_download_year_filter_matches_date(self):
+    data = DownloadFilter('','2002')
+    result = data.compare_year_filter('2002')
+    self.assertTrue(result)
+
+  def test_no_download_year_filter_returns_true(self):
+    data = DownloadFilter('','')
+    result = data.compare_year_filter('2002')
+    self.assertTrue(result)
+  
+  def test_download_year_filter_does_not_match_different_dates(self):
+    data = DownloadFilter('','2002')
+    result = data.compare_year_filter('2004')
+    self.assertFalse(result)
+
+  def test_download_artist_filter_matches_artists(self):
+    data = DownloadFilter(['Skepta','Big H','Demon'],'')
+    self.assertTrue(data.compare_artist_filter('Skepta'))
+    self.assertTrue(data.compare_artist_filter('big h'))
+    self.assertTrue(data.compare_artist_filter('deMon'))
+    self.assertTrue(data.compare_artist_filter('JME,President T,Bruza,Skepta,Big Zuu,Flirta D'))
+
+  def test_no_download_artist_filter_returns_true(self):
+    data = DownloadFilter([''],'') 
+    self.assertTrue(data.compare_artist_filter('Skepta'))
+
+  def test_download_artist_filter_does_match_different_artists(self):
+    data = DownloadFilter(['Skepta','Big H','Demon'],'')
+    self.assertFalse(data.compare_artist_filter('Wiley')) 
+    self.assertFalse(data.compare_artist_filter('JME,President T,Bruza,Big Zuu,Flirta D'))
+
 if __name__ == '__main__':
     unittest.main()
