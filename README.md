@@ -24,13 +24,19 @@ In order to redownload mixes OUTPUT-downloadedMixes.txt must be deleted, or the 
 
 ## Configuration
 
+### Output Folder
+
 Downloaded mixes are saved in a folder named OUTPUT-GrimeArchiveDownloads/ which is created inside the program's directory when main.py is ran.
 
 The name of this output folder can be altered by changing the OUTPUT_FOLDER_NAME variable in GrimeArchiveDownloader/config.py
 
+### Downloaded Mixes File
+
 The ID number of all downloaded mixes are written to a .txt file named OUTPUT-downloadedMixes.txt which is created inside the program's directory when main.py is ran.
 
 The name of this file can be altered by changing the DOWNLOADED_MIXES_FILE_NAME variable in GrimeArchiveDownloader/config.py
+
+### Number of Threads
 
 By default a maximum of 15 threads are used to scrape mix information from the website and a maximum 3 threads are used to download mixes.
 
