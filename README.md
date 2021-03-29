@@ -41,3 +41,9 @@ The name of this file can be altered by changing the DOWNLOADED_MIXES_FILE_NAME 
 By default a maximum of 15 threads are used to scrape mix information from the website and a maximum 3 threads are used to download mixes.
 
 The maximum number of threads used can be changed by altering MAX_CRAWLER_THREADS and MAX_DOWNLOAD_THREADS respectivly in GrimeArchiveDownloader/config.py
+
+## Running Tests
+
+The unit tests for this program are written in tests/tests.py using the Python framework [unittest](https://docs.python.org/3/library/unittest.html#module-unittest)
+
+Test are ran by running `python -m unittest tests.tests` at the command line from within the top level of the program directory
