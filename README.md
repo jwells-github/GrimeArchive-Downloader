@@ -11,7 +11,7 @@ Created with Python Version 3.9.2
 ## Use
 
 1. Install the Python Package [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) `pip install beautifulsoup4`
-2. Run main.py from inside the program's directory.
+2. Run main.py
 3. When prompted enter a list of artists seperated by commas without spaces (e.g. 'Wiley,Skepta,Dizzee Rascal,JME') to only download mixes from certain artists. A mix that features any of these artist will be downloaded. Alternatively you may leave this field blank to download all mixes
 4. When prompted enter a year in the format YYYY (e.g. 2004) to only download mixes from a specific year. Alternatively you may leave this field blank to download mixes from any year
 5. Wait whilst the program collects all mixes that match the given filters.
