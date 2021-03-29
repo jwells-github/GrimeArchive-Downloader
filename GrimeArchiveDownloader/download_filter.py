@@ -13,10 +13,8 @@ class DownloadFilter:
     
   def compare_artist_filter(self, mcs):
     if len(self.artists[0]) == 0:
-      print('0 artist length')
       return True
     for artist in self.artists:
       if artist.lower() in mcs.lower():
-        print('' + artist.lower() + ' is in ' + mcs.lower())
         return True
     return False
