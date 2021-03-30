@@ -38,7 +38,7 @@ The name of this file can be altered by changing the DOWNLOADED_MIXES_FILE_NAME 
 
 ### Number of Threads
 
-By default a maximum of 15 threads are used to scrape mix information from the website and a maximum 3 threads are used to download mixes.
+By default a maximum of 15 threads are used to scrape mix information from the website and a maximum of 3 threads are used to download mixes.
 
 The maximum number of threads used can be changed by altering MAX_CRAWLER_THREADS and MAX_DOWNLOAD_THREADS respectively in GrimeArchiveDownloader/config.py
 
