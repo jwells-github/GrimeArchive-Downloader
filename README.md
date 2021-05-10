@@ -1,6 +1,6 @@
 # GrimeArchive-Downloader
 
-A Python program to download all of the grime mixes hosted on https://grimearchive.org/
+A Python program to download all of the grime mixes hosted on https://www.grimearchive.org/
 
 An artist filter may be entered to restrict downloads to mixes that contain specific artists.
 
